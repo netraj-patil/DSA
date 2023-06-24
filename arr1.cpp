@@ -30,6 +30,7 @@ void setVal(struct myArray* a)
     }
 }
 
+//to insert element in array
 void insert(struct myArray* a,int n,int p){
     if(a->used_size==a->total_size){
         cout<<"no enough space n array";
@@ -50,6 +51,7 @@ void insert(struct myArray* a,int n,int p){
     a->used_size += 1;
 }
 
+//to delete element in array
 void Delete(struct myArray* a,int p){
     if(a->used_size<=p){
         cout<<"no element in array at that posion"<<endl;
