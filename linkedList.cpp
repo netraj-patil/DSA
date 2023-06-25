@@ -18,11 +18,11 @@ void create(struct Node* ptr,int d){
 
 void insert(struct Node* ptr,int p,int d){      //here head node has number 1
     for(int i=1;i<p-1;i++){
+        ptr=ptr->next;
         if(ptr==NULL){
             cout<<"\nCannot insert! Not enough element";
             return;
         }
-        ptr=ptr->next;
     }
     struct Node* n = new Node;
     n->data=d;
@@ -32,11 +32,11 @@ void insert(struct Node* ptr,int p,int d){      //here head node has number 1
 
 void Delete(struct Node* ptr,int p){
     for(int i=1;i<p-1;i++){
-        if(ptr==NULL){
+        ptr=ptr->next;
+        if(ptr==NULL||ptr->next==NULL){
             cout<<"\nCannot delete! Not enough element";
             return;
         }
-        ptr=ptr->next;
     }
     Node* node;
     node = ptr->next;
@@ -86,11 +86,25 @@ int main()
     std::cin>>p;
     std::cout<<"\nEnter data with which u want to insert an node : ";
     std::cin>>d;
-    insert(head,p,d);
+    if(p==1){
+        Node* node =new Node;
+        node->data=d;
+        head=node;
+    }
+    else{
+        
+        insert(head,p,d);
+    }
+    
 
     std::cout<<"\nEnter position at which u want to delete a node : ";
     std::cin>>p;
-    Delete(head,p);
+    if(p==1){
+        Node* node=head;
+        head=head->next;
+        delete node;
+    }
+    else  Delete(head,p);
 
     std::cout<<"\n=====********************************************====";
     display(head);
