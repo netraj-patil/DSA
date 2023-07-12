@@ -41,9 +41,18 @@ void display(Stack* s){
         cout<<"\n"<<"Nothing in stack";
         return;
     }
-    for(int i=0;i<=s->top;i++){
+    for(int i=s->top;i>=0;i--){
         cout<<"\n"<<(s->arr)[i];
     }
+}
+
+int peek(struct Stack* s, int i){
+    int p=s->top-i+1;
+    if(p<0){
+        cout<<"Not valid position";
+        return -1;
+    }
+    return s->arr[p];
 }
 
 int main(){
@@ -73,5 +82,6 @@ int main(){
     
     pop(&s);
     display(&s);
+    cout<<"\npeek at 2nd position : "<<peek(&s, 2);
     return 0;
 }
