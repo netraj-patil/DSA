@@ -1,5 +1,6 @@
 #include<iostream>
 #include<conio.h>
+#include<queue>
 using namespace std;
 
 struct Node
@@ -7,53 +8,49 @@ struct Node
     int data;
     struct Node *left;
     struct Node *right;
-
-    Node(int d){
-        data=d;
-    }
 };
 
-struct Node* create(){
-    int n,d;
-    cout<<"Enter number of elements : ";
-    cin>>n;
-    struct Node *head;
+void insert(struct Node* root, int data){
+    queue<struct Node*> q;
+    struct Node *temp;
+    struct Node *node;
 
-    cout<<"\nEnter element at head : ";
-    cin>>d;
-    head = new Node(d);
+    node = (struct Node*)malloc(sizeof(struct Node));
+    node->left=node->right=NULL;
+    node->data=data;
 
-    for(int i=1;i<n;i++){
-        
-
-        Node *node;
-        node = head;
-        cout<<"\n\nYou are at head : ";
-
-        while(node != NULL)
-        {
-            cout<<"\npress 'r' to go right and 'l' to go left : ";
-            char  ch;
-            cin>>ch;
-            
-            if(ch=='r'||ch=='R'){
-                node = node->right;
-            }
-            else if(ch=='l'||ch=='L'){
-                node = node->left;
-            }
-            else{
-                cout<<"\n You entered wrong input..........";
-            }
-        }
-
-        cout<<"\nEnter the data : ";
-        cin>>d;
-        node = new Node(d);
-        
+    if(!node){
+        cout<<"\nmemory error";
+        return;
     }
 
-    return head;
+    if(!root){
+        root = node;
+        return;
+    }
+
+    q.push(root);
+
+
+    while(!q.empty()){
+        temp= q.front();
+        q.pop();
+
+        if(temp->left != NULL){
+            q.push(temp->left);
+        }
+        else{
+            temp->left = node;
+            return;
+        }
+        if(temp->right != NULL){
+            q.push(temp->right);
+        }
+        else{
+            temp->right = node;
+            return;
+        }
+    }
 }
 
 void preOrder(struct Node *n){
@@ -66,7 +63,16 @@ void preOrder(struct Node *n){
 
 int main(){
     Node *head;
-    head = create();
+    insert(head,32);
+    insert(head,23);
+    insert(head,45);
+    insert(head,1);
+    insert(head,2);
+    insert(head,78);
+    insert(head,87);
+    insert(head,6);
+    insert(head,98);
+    
     preOrder(head);
     return 0;
 }
