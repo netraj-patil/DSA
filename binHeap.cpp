@@ -62,3 +62,29 @@ void percolateDown(struct Heap* h, int i){
         percolateDown(h,max);
     }
 }
+
+// heapify array
+void buildHeap(struct Heap* h, int A[], int n){
+    if(h== NULL){
+        return;
+    }
+    for(int i=0;i<h->count;i++){
+        int l= leftChild(h,i);
+        int r= rightChild(h, i);
+        if(l!=-1 && h->arr[l]> h->arr[i]){
+            int temp = h->arr[l];
+            h->arr[l]= h->arr[i];
+            h->arr[i] = temp;
+        }
+        if(r!=-1 && h->arr[r]> h->arr[i]){
+            int temp = h->arr[r];
+            h->arr[r]= h->arr[i];
+            h->arr[i] = temp;
+        }
+        if(l!=-1 && h->arr[l]> h->arr[i]){
+            int temp = h->arr[l];
+            h->arr[l]= h->arr[i];
+            h->arr[i] = temp;
+        }
+    }
+}
